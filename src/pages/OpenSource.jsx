@@ -12,7 +12,7 @@ const PR_ORGS = [
     bgColor: 'bg-primary/5',
     prs: [
       { title: 'fix: return 400 on duplicate logger name in PUT /api/logger/:id', num: '#710', state: 'open', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/710' },
-      { title: 'fix: resolve test hang caused by PostgreSQL lock conflict', num: '#695', state: 'open', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/695' },
+      { title: 'fix: resolve test hang caused by PostgreSQL lock conflict in test_cell.py', num: '#695', state: 'open', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/695' },
       { title: 'feat: query sensors only if they exist, batch sensor data requests', num: '#684', state: 'open', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/684' },
       { title: 'feat: add cell name search to GET /api/cell/ endpoint', num: '#685', state: 'merged', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/685' },
       { title: 'fix: harden Google OAuth token exchange and tolerate Docker clock skew', num: '#651', state: 'merged', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/651' },
@@ -35,6 +35,8 @@ const PR_ORGS = [
       { title: 'fix: correctly increment userProfileDialogKey in setState', num: '#351', state: 'merged', url: 'https://github.com/StatTag/StatWrap/pull/351' },
       { title: 'fix: remove duplicate URL key in AssetType constant', num: '#350', state: 'merged', url: 'https://github.com/StatTag/StatWrap/pull/350' },
       { title: 'Feature: Auto-select default project on app load', num: '#309', state: 'merged', url: 'https://github.com/StatTag/StatWrap/pull/309' },
+      { title: 'Fix: Clear project selection after removing a project', num: '#308', state: 'merged', url: 'https://github.com/StatTag/StatWrap/pull/308' },
+      { title: 'feat: implement live search with debounce', num: '#306', state: 'merged', url: 'https://github.com/StatTag/StatWrap/pull/306' },
     ],
   },
   {
@@ -52,6 +54,7 @@ const PR_ORGS = [
       { title: 'test: add unit tests for User.employmentStatus resolver', num: '#5245', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/5245' },
       { title: 'test: add unit tests for User.isEmailAddressVerified resolver', num: '#5229', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/5229' },
       { title: 'fix: remove ANSI color codes from test files', num: '#4946', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/4946' },
+      { title: 'Fix/remove ANSI colors from test files', num: '#4945', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/4945' },
     ],
   },
   {
@@ -64,6 +67,28 @@ const PR_ORGS = [
       { title: 'feat: add @mention support in note markdown editor', num: '#112', state: 'merged', url: 'https://github.com/AcademySoftwareFoundation/dna/pull/112' },
       { title: 'Implement interactive notes properties panel with entity search', num: '#71', state: 'merged', url: 'https://github.com/AcademySoftwareFoundation/dna/pull/71' },
       { title: 'Add unified entity search endpoint', num: '#63', state: 'merged', url: 'https://github.com/AcademySoftwareFoundation/dna/pull/63' },
+    ],
+  },
+  {
+    org: 'AcademySoftwareFoundation/rawtoaces',
+    icon: 'photo_camera',
+    color: 'text-tertiary',
+    borderColor: 'border-tertiary/30',
+    bgColor: 'bg-tertiary/5',
+    prs: [
+      { title: 'Fix/verbosity log output', num: '#249', state: 'merged', url: 'https://github.com/AcademySoftwareFoundation/rawtoaces/pull/249' },
+      { title: 'Refactor error handling to separate library and CLI error messages', num: '#237', state: 'merged', url: 'https://github.com/AcademySoftwareFoundation/rawtoaces/pull/237' },
+    ],
+  },
+  {
+    org: 'edulinq/autograder-server',
+    icon: 'school',
+    color: 'text-primary',
+    borderColor: 'border-primary/30',
+    bgColor: 'bg-primary/5',
+    prs: [
+      { title: 'Add benevolent late day allocation feature', num: '#206', state: 'open', url: 'https://github.com/edulinq/autograder-server/pull/206' },
+      { title: 'Add grace time feature for assignment due dates', num: '#205', state: 'merged', url: 'https://github.com/edulinq/autograder-server/pull/205' },
     ],
   },
   {
@@ -137,23 +162,23 @@ const PR_ORGS = [
     ],
   },
   {
-    org: 'AcademySoftwareFoundation/rawtoaces',
-    icon: 'photo_camera',
+    org: 'edulinq/lms-toolkit',
+    icon: 'menu_book',
     color: 'text-tertiary',
     borderColor: 'border-tertiary/30',
     bgColor: 'bg-tertiary/5',
     prs: [
-      { title: 'Fix/verbosity log output', num: '#249', state: 'merged', url: 'https://github.com/AcademySoftwareFoundation/rawtoaces/pull/249' },
+      { title: 'Add optional header support for table input files', num: '#34', state: 'merged', url: 'https://github.com/edulinq/lms-toolkit/pull/34' },
     ],
   },
   {
-    org: 'edulinq/autograder-server',
-    icon: 'school',
+    org: 'PalisadoesFoundation/developer-docs',
+    icon: 'description',
     color: 'text-primary',
     borderColor: 'border-primary/30',
     bgColor: 'bg-primary/5',
     prs: [
-      { title: 'Add benevolent late day allocation feature', num: '#206', state: 'open', url: 'https://github.com/edulinq/autograder-server/pull/206' },
+      { title: 'Update 2025.md', num: '#42', state: 'merged', url: 'https://github.com/PalisadoesFoundation/developer-docs/pull/42' },
     ],
   },
   {
@@ -164,6 +189,17 @@ const PR_ORGS = [
     bgColor: 'bg-secondary/5',
     prs: [
       { title: 'docs: add INSTALLATION.md with validated setup guide', num: '#297', state: 'open', url: 'https://github.com/c2siorg/Codelabz/pull/297' },
+    ],
+  },
+  {
+    org: 'Kavyansh-Bagdi/UIDAI-Bot-Detection',
+    icon: 'security',
+    color: 'text-tertiary',
+    borderColor: 'border-tertiary/30',
+    bgColor: 'bg-tertiary/5',
+    prs: [
+      { title: 'adding login page', num: '#1', state: 'merged', url: 'https://github.com/Kavyansh-Bagdi/UIDAI-Bot-Detection/pull/1' },
+      { title: 'adding ux', num: '#2', state: 'merged', url: 'https://github.com/Kavyansh-Bagdi/UIDAI-Bot-Detection/pull/2' },
     ],
   },
 ]
