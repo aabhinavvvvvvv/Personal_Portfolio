@@ -1,162 +1,230 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const PINNED_REPOS = [
-  {
-    name: 'k8s-flask-postgre',
-    desc: 'Containerized Flask + PostgreSQL application orchestrated on Kubernetes with full deployment manifests and auto-scaling.',
-    lang: 'Python',
-    langColor: 'bg-blue-400',
-    url: 'https://github.com/aabhinavvvvvvv/k8s-flask-postgre',
-    badge: 'Personal',
-    badgeColor: 'group-hover:border-primary/50 group-hover:text-primary',
-    hoverColor: 'group-hover:text-primary',
-    gradientFrom: 'from-primary/30',
-    gradientTo: 'to-secondary/30',
-    icon: 'cloud_done',
-    iconColor: 'text-primary',
-  },
-  {
-    name: 'solana_wallet_adapter',
-    desc: 'Solana wallet integration layer with React hooks for seamless dApp connectivity across multiple wallet providers.',
-    lang: 'JavaScript',
-    langColor: 'bg-yellow-400',
-    url: 'https://github.com/aabhinavvvvvvv/solana_wallet_adapter',
-    badge: 'Web3',
-    badgeColor: 'group-hover:border-secondary/50 group-hover:text-secondary',
-    hoverColor: 'group-hover:text-secondary',
-    gradientFrom: 'from-secondary/30',
-    gradientTo: 'to-primary/30',
-    icon: 'token',
-    iconColor: 'text-secondary',
-  },
-  {
-    name: 'UIDAI-Bot-Detection',
-    desc: 'ML-powered bot detection system for UIDAI services using behavioral analysis and anomaly detection.',
-    lang: 'JavaScript',
-    langColor: 'bg-yellow-400',
-    url: 'https://github.com/aabhinavvvvvvv/UIDAI-Bot-Detection',
-    badge: 'Security',
-    badgeColor: 'group-hover:border-tertiary/50 group-hover:text-tertiary',
-    hoverColor: 'group-hover:text-tertiary',
-    gradientFrom: 'from-tertiary/30',
-    gradientTo: 'to-primary/30',
-    icon: 'security',
-    iconColor: 'text-tertiary',
-  },
-  {
-    name: 'blitzschlag25',
-    desc: "Mission-critical infrastructure platform for MNIT Jaipur's premier technical festival handling 10k+ concurrent users.",
-    lang: 'JavaScript',
-    langColor: 'bg-yellow-400',
-    url: 'https://github.com/aabhinavvvvvvv/blitzschlag25',
-    badge: 'DevOps',
-    badgeColor: 'group-hover:border-primary/50 group-hover:text-primary',
-    hoverColor: 'group-hover:text-primary',
-    gradientFrom: 'from-primary/30',
-    gradientTo: 'to-secondary/30',
-    icon: 'rocket_launch',
-    iconColor: 'text-primary',
-  },
-]
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const DAYS = ['', 'Mon', '', 'Wed', '', 'Fri', '']
 
-const OS_CONTRIBUTIONS = [
+const PR_ORGS = [
   {
-    title: 'Istio',
-    org: 'istio',
-    badge: 'Contributor',
-    badgeColor: 'group-hover:border-primary/50 group-hover:text-primary',
-    hoverColor: 'group-hover:text-primary',
-    gradientFrom: 'from-primary/30',
-    gradientTo: 'to-secondary/30',
-    desc: 'Contributed to the cloud-native service mesh for Kubernetes — enhancing observability and traffic management policies.',
-    meta: 'Go · CNCF Project',
-    url: 'https://github.com/istio/istio',
-    icon: 'hub',
-    iconColor: 'text-primary',
+    org: 'jlab-sensing/ENTS-backend',
+    icon: 'sensors',
+    color: 'text-primary',
+    borderColor: 'border-primary/30',
+    bgColor: 'bg-primary/5',
+    total: 7,
+    prs: [
+      { title: 'return 400 on duplicate logger name in PUT /api/logger/:id', num: '#710', state: 'open', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/710' },
+      { title: 'resolve test hang caused by PostgreSQL lock conflict', num: '#695', state: 'open', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/695' },
+      { title: 'feat: add cell name search to GET /api/cell/ endpoint', num: '#685', state: 'merged', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/685' },
+      { title: 'fix: harden Google OAuth token exchange and tolerate Docker clock skew', num: '#651', state: 'merged', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/651' },
+      { title: 'feat: query sensors only if they exist, batch sensor data requests', num: '#650', state: 'merged', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/650' },
+      { title: 'Fix cell tag assignment and lat/long display for zero values', num: '#623', state: 'merged', url: 'https://github.com/jlab-sensing/ENTS-backend/pull/623' },
+    ],
   },
   {
-    title: 'Kyverno',
-    org: 'kyverno',
-    badge: 'Contributor',
-    badgeColor: 'group-hover:border-secondary/50 group-hover:text-secondary',
-    hoverColor: 'group-hover:text-secondary',
-    gradientFrom: 'from-secondary/30',
-    gradientTo: 'to-primary/30',
-    desc: 'Contributed to the Cloud Native Policy Management engine for Kubernetes, part of the CNCF sandbox ecosystem.',
-    meta: 'Go · CNCF Sandbox',
-    url: 'https://github.com/kyverno/kyverno',
-    icon: 'policy',
-    iconColor: 'text-secondary',
+    org: 'StatTag/StatWrap',
+    icon: 'analytics',
+    color: 'text-secondary',
+    borderColor: 'border-secondary/30',
+    bgColor: 'bg-secondary/5',
+    total: 7,
+    prs: [
+      { title: 'improve notes UX and add person delete confirmation', num: '#375', state: 'open', url: 'https://github.com/StatTag/StatWrap/pull/375' },
+      { title: 'add JavaScript/JSX asset handler', num: '#370', state: 'open', url: 'https://github.com/StatTag/StatWrap/pull/370' },
+      { title: 'fix: pass id and name through createStatWrapConfig for cloned projects', num: '#361', state: 'merged', url: 'https://github.com/StatTag/StatWrap/pull/361' },
+      { title: 'fix: reset DataTable state on Expand All / Collapse All click', num: '#360', state: 'merged', url: 'https://github.com/StatTag/StatWrap/pull/360' },
+      { title: 'fix: correctly increment userProfileDialogKey in setState', num: '#351', state: 'merged', url: 'https://github.com/StatTag/StatWrap/pull/351' },
+      { title: 'fix: remove duplicate URL key in AssetType constant', num: '#350', state: 'merged', url: 'https://github.com/StatTag/StatWrap/pull/350' },
+    ],
   },
   {
-    title: 'Volcano',
-    org: 'volcano-sh',
-    badge: 'Contributor',
-    badgeColor: 'group-hover:border-tertiary/50 group-hover:text-tertiary',
-    hoverColor: 'group-hover:text-tertiary',
-    gradientFrom: 'from-tertiary/30',
-    gradientTo: 'to-primary/30',
-    desc: 'Contributed to the cloud-native batch scheduling system for high-performance workloads under CNCF.',
-    meta: 'Go · CNCF Incubating',
-    url: 'https://github.com/volcano-sh/volcano',
-    icon: 'batch_prediction',
-    iconColor: 'text-tertiary',
-  },
-  {
-    title: 'Talawa API',
-    org: 'PalisadoesFoundation',
-    badge: 'Contributor',
-    badgeColor: 'group-hover:border-primary/50 group-hover:text-primary',
-    hoverColor: 'group-hover:text-primary',
-    gradientFrom: 'from-primary/30',
-    gradientTo: 'to-tertiary/30',
-    desc: 'Contributed to the GraphQL API backend powering the Talawa community management mobile application.',
-    meta: 'TypeScript · Open Source',
-    url: 'https://github.com/PalisadoesFoundation/talawa-api',
+    org: 'PalisadoesFoundation/talawa-api',
     icon: 'api',
-    iconColor: 'text-primary',
+    color: 'text-tertiary',
+    borderColor: 'border-tertiary/30',
+    bgColor: 'bg-tertiary/5',
+    total: 6,
+    prs: [
+      { title: 'test(getVolunteerMembership): add comprehensive integration tests', num: '#5275', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/5275' },
+      { title: 'test: add integration tests for Query plugins.ts', num: '#5271', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/5271' },
+      { title: 'test: add unit tests for User.addressLine2 resolver', num: '#5251', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/5251' },
+      { title: 'test: add unit tests for User.creator resolver', num: '#5246', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/5246' },
+      { title: 'test: add unit tests for User.employmentStatus resolver', num: '#5245', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/5245' },
+      { title: 'fix: remove ANSI color codes from test files', num: '#4946', state: 'merged', url: 'https://github.com/PalisadoesFoundation/talawa-api/pull/4946' },
+    ],
+  },
+  {
+    org: 'AcademySoftwareFoundation/dna',
+    icon: 'biotech',
+    color: 'text-primary',
+    borderColor: 'border-primary/30',
+    bgColor: 'bg-primary/5',
+    total: 2,
+    prs: [
+      { title: 'feat: add @mention support in note markdown editor', num: '#112', state: 'merged', url: 'https://github.com/AcademySoftwareFoundation/dna/pull/112' },
+      { title: 'Implement interactive notes properties panel with entity search', num: '#71', state: 'merged', url: 'https://github.com/AcademySoftwareFoundation/dna/pull/71' },
+    ],
+  },
+  {
+    org: 'open-telemetry/opentelemetry-collector-contrib',
+    icon: 'monitoring',
+    color: 'text-secondary',
+    borderColor: 'border-secondary/30',
+    bgColor: 'bg-secondary/5',
+    total: 1,
+    prs: [
+      { title: '[pkg/stanza] Add support for `if` option in `recombine` operator', num: '#46074', state: 'merged', url: 'https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/46074' },
+    ],
+  },
+  {
+    org: 'kyverno/kyverno',
+    icon: 'policy',
+    color: 'text-tertiary',
+    borderColor: 'border-tertiary/30',
+    bgColor: 'bg-tertiary/5',
+    total: 1,
+    prs: [
+      { title: 'fix(cli): return error instead of panic when imageRegistryCredentials.secrets are used', num: '#15061', state: 'merged', url: 'https://github.com/kyverno/kyverno/pull/15061' },
+    ],
+  },
+  {
+    org: 'AcademySoftwareFoundation/MaterialX',
+    icon: 'texture',
+    color: 'text-primary',
+    borderColor: 'border-primary/30',
+    bgColor: 'bg-primary/5',
+    total: 1,
+    prs: [
+      { title: 'Fix inconsistent background color in MaterialXView on Metal', num: '#2800', state: 'merged', url: 'https://github.com/AcademySoftwareFoundation/MaterialX/pull/2800' },
+    ],
+  },
+  {
+    org: 'c2siorg/Codelabz',
+    icon: 'code',
+    color: 'text-secondary',
+    borderColor: 'border-secondary/30',
+    bgColor: 'bg-secondary/5',
+    total: 1,
+    prs: [
+      { title: 'add INSTALLATION.md with validated setup guide', num: '#297', state: 'open', url: 'https://github.com/c2siorg/Codelabz/pull/297' },
+    ],
   },
 ]
 
 const ACTIVITY_STREAM = [
-  { icon: 'merge', color: 'text-primary', text: 'Merged PR: istio/istio — traffic policy fix', num: 'istio' },
-  { icon: 'add_circle', color: 'text-secondary', text: 'Feature: kyverno policy validation enhancement', num: 'kyverno' },
-  { icon: 'bug_report', color: 'text-tertiary', text: 'Fix: volcano batch scheduler race condition', num: 'volcano' },
-  { icon: 'merge', color: 'text-primary', text: 'Merged PR: talawa-api GraphQL resolver', num: 'talawa' },
-  { icon: 'commit', color: 'text-secondary', text: 'k8s-flask-postgre: Add Helm chart support', num: 'personal' },
-  { icon: 'add_circle', color: 'text-primary', text: 'solana_wallet_adapter: Multi-wallet support', num: 'web3' },
-  { icon: 'merge', color: 'text-primary', text: 'Merged PR: istio/istio — traffic policy fix', num: 'istio' },
-  { icon: 'add_circle', color: 'text-secondary', text: 'Feature: kyverno policy validation enhancement', num: 'kyverno' },
+  { icon: 'merge', color: 'text-primary', text: 'fix: harden Google OAuth & Docker clock skew', org: 'ENTS-backend' },
+  { icon: 'add_circle', color: 'text-secondary', text: 'fix: reset DataTable on Expand All click', org: 'StatWrap' },
+  { icon: 'commit', color: 'text-tertiary', text: '[pkg/stanza] Add `if` option in recombine operator', org: 'opentelemetry' },
+  { icon: 'merge', color: 'text-primary', text: 'fix(cli): return error instead of panic — kyverno', org: 'kyverno' },
+  { icon: 'add_circle', color: 'text-secondary', text: 'feat: add @mention support in note markdown editor', org: 'dna' },
+  { icon: 'bug_report', color: 'text-tertiary', text: 'Fix inconsistent background in MaterialXView on Metal', org: 'MaterialX' },
+  { icon: 'merge', color: 'text-primary', text: 'test: add integration tests for getVolunteerMembership', org: 'talawa-api' },
+  { icon: 'commit', color: 'text-secondary', text: 'feat: add cell name search to GET /api/cell/ endpoint', org: 'ENTS-backend' },
+  { icon: 'merge', color: 'text-primary', text: 'fix: harden Google OAuth & Docker clock skew', org: 'ENTS-backend' },
+  { icon: 'add_circle', color: 'text-secondary', text: 'fix: reset DataTable on Expand All click', org: 'StatWrap' },
 ]
+
+function StateChip({ state }) {
+  if (state === 'merged') return (
+    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-secondary/10 text-secondary border border-secondary/20">
+      <span className="material-symbols-outlined text-[10px]">merge</span> Merged
+    </span>
+  )
+  if (state === 'open') return (
+    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-primary/10 text-primary border border-primary/20">
+      <span className="material-symbols-outlined text-[10px]">call_merge</span> Open
+    </span>
+  )
+  return (
+    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/5 text-white/40 border border-white/10">
+      Closed
+    </span>
+  )
+}
 
 export default function OpenSource() {
   const gridRef = useRef(null)
+  const [expandedOrg, setExpandedOrg] = useState(null)
 
   useEffect(() => {
-    if (gridRef.current) {
-      gridRef.current.innerHTML = ''
-      for (let i = 0; i < 364; i++) {
-        const cell = document.createElement('div')
-        cell.className = 'contribution-cell'
-        const intensity = Math.random()
-        if (intensity > 0.9) cell.classList.add('bg-primary', 'shadow-[0_0_8px_rgba(0,210,255,0.4)]')
-        else if (intensity > 0.7) cell.classList.add('bg-primary/60')
-        else if (intensity > 0.4) cell.classList.add('bg-primary/30')
-        else if (intensity > 0.1) cell.classList.add('bg-primary/10')
-        else cell.classList.add('bg-surface-container-highest')
-        gridRef.current.appendChild(cell)
-      }
+    if (!gridRef.current) return
+    gridRef.current.innerHTML = ''
+
+    // Build 52 weeks × 7 days with month labels
+    const now = new Date()
+    const cells = []
+    for (let i = 363; i >= 0; i--) {
+      const d = new Date(now)
+      d.setDate(d.getDate() - i)
+      const intensity = Math.random()
+      cells.push({ date: d, intensity })
     }
 
-    const handleMouse = (e) => {
-      if (!gridRef.current) return
-      const x = (e.clientX / window.innerWidth - 0.5) * 10
-      const y = (e.clientY / window.innerHeight - 0.5) * 10
-      gridRef.current.style.transform = `translate(${x}px, ${y}px)`
+    // Wrapper with day labels
+    const wrapper = document.createElement('div')
+    wrapper.className = 'flex gap-1'
+
+    // Day label column
+    const dayCol = document.createElement('div')
+    dayCol.className = 'flex flex-col gap-[3px] pr-2'
+    DAYS.forEach(day => {
+      const label = document.createElement('div')
+      label.className = 'text-[9px] text-on-surface-variant/40 h-[10px] flex items-center font-label'
+      label.textContent = day
+      dayCol.appendChild(label)
+    })
+    wrapper.appendChild(dayCol)
+
+    // Weeks
+    const weeksWrapper = document.createElement('div')
+    weeksWrapper.className = 'flex flex-col gap-1'
+
+    // Month labels row
+    const monthRow = document.createElement('div')
+    monthRow.className = 'flex gap-[3px] mb-1'
+    let lastMonth = -1
+    for (let w = 0; w < 52; w++) {
+      const cellDate = cells[w * 7]?.date
+      const month = cellDate?.getMonth()
+      const label = document.createElement('div')
+      label.style.width = '10px'
+      label.className = 'text-[9px] text-on-surface-variant/40 font-label overflow-visible whitespace-nowrap'
+      if (month !== undefined && month !== lastMonth) {
+        label.textContent = MONTHS[month]
+        lastMonth = month
+      }
+      monthRow.appendChild(label)
     }
-    window.addEventListener('mousemove', handleMouse)
-    return () => window.removeEventListener('mousemove', handleMouse)
+    weeksWrapper.appendChild(monthRow)
+
+    // Grid rows (7 days × 52 weeks)
+    const gridRows = document.createElement('div')
+    gridRows.className = 'flex gap-[3px]'
+
+    for (let w = 0; w < 52; w++) {
+      const col = document.createElement('div')
+      col.className = 'flex flex-col gap-[3px]'
+      for (let d = 0; d < 7; d++) {
+        const idx = w * 7 + d
+        const cell = document.createElement('div')
+        cell.className = 'w-[10px] h-[10px] rounded-[2px] transition-transform hover:scale-125 hover:z-10 cursor-pointer'
+        const { intensity } = cells[idx] || { intensity: 0 }
+        if (intensity > 0.9) cell.classList.add('bg-primary', 'shadow-[0_0_6px_rgba(0,210,255,0.6)]')
+        else if (intensity > 0.7) cell.classList.add('bg-primary/70')
+        else if (intensity > 0.45) cell.classList.add('bg-primary/40')
+        else if (intensity > 0.15) cell.classList.add('bg-primary/15')
+        else cell.classList.add('bg-white/5')
+        col.appendChild(cell)
+      }
+      gridRows.appendChild(col)
+    }
+    weeksWrapper.appendChild(gridRows)
+    wrapper.appendChild(weeksWrapper)
+    gridRef.current.appendChild(wrapper)
   }, [])
+
+  const totalPRs = PR_ORGS.reduce((acc, o) => acc + o.total, 0)
+  const mergedPRs = PR_ORGS.flatMap(o => o.prs).filter(p => p.state === 'merged').length
+  const openPRs = PR_ORGS.flatMap(o => o.prs).filter(p => p.state === 'open').length
 
   return (
     <main className="pt-24 pb-32 px-6 max-w-7xl mx-auto">
@@ -178,7 +246,7 @@ export default function OpenSource() {
             through code.
           </h2>
           <p className="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
-            Seeking full-stack project collaborations while exploring blockchain technologies. From cloud-native infrastructure to decentralized protocols — contributing to projects that define the open ecosystem.
+            Seeking full-stack project collaborations while exploring blockchain technologies. Contributing across CNCF, Academy Software Foundation, and open research ecosystems.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
@@ -188,166 +256,144 @@ export default function OpenSource() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full kinetic-gradient text-white font-headline font-bold text-sm shadow-[0_0_20px_rgba(0,210,255,0.3)] hover:scale-105 transition-all duration-300"
             >
               <span className="material-symbols-outlined text-sm">open_in_new</span>
-              View on GitHub
+              @aabhinavvvvvvv
             </a>
             <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full glass-card text-sm">
-              <span className="text-on-surface-variant">61 repos</span>
+              <span className="text-secondary font-bold">{mergedPRs} merged</span>
               <span className="w-px h-4 bg-outline-variant" />
-              <span className="text-on-surface-variant">8 followers</span>
+              <span className="text-primary font-bold">{openPRs} open</span>
               <span className="w-px h-4 bg-outline-variant" />
-              <span className="text-primary font-bold">Pull Shark ×2</span>
+              <span className="text-on-surface-variant">{PR_ORGS.length} orgs</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* GitHub Activity Graph */}
+      {/* Contribution Graph */}
       <section className="mb-16">
         <div className="glass-card p-8 rounded-2xl relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 relative z-10">
             <div>
-              <h3 className="font-headline text-2xl font-bold mb-1">Contribution Activity</h3>
+              <h3 className="font-headline text-2xl font-bold mb-1">Contribution Graph</h3>
               <p className="text-on-surface-variant text-sm font-label">
-                <a href="https://github.com/aabhinavvvvvvv" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">@aabhinavvvvvvv</a>
+                <a href="https://github.com/aabhinavvvvvvv" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">github.com/aabhinavvvvvvv</a>
                 {' '}· 61 public repositories
               </p>
             </div>
             <div className="flex items-center gap-2 text-[10px] text-on-surface-variant uppercase tracking-widest font-label">
               <span>Less</span>
               <div className="flex gap-1">
-                <div className="w-3 h-3 bg-surface-container-highest rounded-sm" />
-                <div className="w-3 h-3 bg-primary/20 rounded-sm border border-primary/10" />
-                <div className="w-3 h-3 bg-primary/40 rounded-sm border border-primary/20" />
-                <div className="w-3 h-3 bg-primary/70 rounded-sm border border-primary/40" />
-                <div className="w-3 h-3 bg-primary rounded-sm border border-primary/60 shadow-[0_0_8px_rgba(0,210,255,0.4)]" />
+                <div className="w-3 h-3 bg-white/5 rounded-[2px]" />
+                <div className="w-3 h-3 bg-primary/15 rounded-[2px]" />
+                <div className="w-3 h-3 bg-primary/40 rounded-[2px]" />
+                <div className="w-3 h-3 bg-primary/70 rounded-[2px]" />
+                <div className="w-3 h-3 bg-primary rounded-[2px] shadow-[0_0_6px_rgba(0,210,255,0.6)]" />
               </div>
               <span>More</span>
             </div>
           </div>
-          <div className="overflow-x-auto pb-4 scroll-mask">
-            <div ref={gridRef} className="contribution-grid min-w-[800px] transition-transform duration-1000 ease-out" />
+          <div className="overflow-x-auto pb-2">
+            <div ref={gridRef} className="min-w-[600px]" />
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
-        <div className="md:col-span-2 glass-card p-8 rounded-2xl flex flex-col justify-between group">
-          <div className="flex justify-between items-start">
-            <span className="material-symbols-outlined text-secondary text-4xl mb-4 transition-transform group-hover:scale-110 group-hover:rotate-12">hub</span>
-            <span className="text-[10px] text-primary/40 font-bold uppercase tracking-widest">CNCF + OSS</span>
-          </div>
-          <div>
-            <h4 className="text-5xl font-headline font-bold mb-2 group-hover:text-primary transition-colors">61</h4>
-            <p className="text-on-surface-variant font-label uppercase tracking-widest text-xs">Public Repositories</p>
-          </div>
-        </div>
-        <div className="glass-card p-8 rounded-2xl flex flex-col justify-between group">
-          <span className="material-symbols-outlined text-primary text-4xl mb-4 transition-transform group-hover:-translate-y-2">rebase_edit</span>
-          <div>
-            <h4 className="text-4xl font-headline font-bold mb-2">4+</h4>
-            <p className="text-on-surface-variant font-label uppercase tracking-widest text-xs">OSS Projects</p>
-          </div>
-        </div>
-        <div className="glass-card p-8 rounded-2xl flex flex-col justify-between group">
-          <span className="material-symbols-outlined text-tertiary text-4xl mb-4 group-hover:animate-pulse">grade</span>
-          <div>
-            <h4 className="text-4xl font-headline font-bold mb-2">×2</h4>
-            <p className="text-on-surface-variant font-label uppercase tracking-widest text-xs">Pull Shark Badge</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Marquee Activity */}
-      <section className="mb-20 overflow-hidden">
+      {/* Activity Stream Marquee */}
+      <section className="mb-16 overflow-hidden">
         <h3 className="font-headline text-sm font-bold mb-6 text-on-surface-variant uppercase tracking-[0.3em]">Recent Activity Stream</h3>
-        <div className="relative flex overflow-x-hidden glass-card rounded-xl py-6">
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-center">
+        <div className="relative flex overflow-x-hidden glass-card rounded-xl py-5">
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-center px-6">
             {ACTIVITY_STREAM.map((item, i) => (
               <div key={i} className="flex items-center gap-3 text-sm">
                 <span className={`material-symbols-outlined ${item.color} text-sm`}>{item.icon}</span>
                 <span className="text-on-surface font-medium">{item.text}</span>
-                <span className="text-on-surface-variant/40 uppercase text-[10px] tracking-widest">{item.num}</span>
+                <span className="text-on-surface-variant/40 text-[10px] uppercase tracking-widest border border-outline-variant/30 rounded-full px-2 py-0.5">{item.org}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pinned Repos */}
+      {/* PR List by Org */}
       <section className="mb-20">
-        <h3 className="font-headline text-3xl font-bold mb-10 flex items-center gap-4">
-          Pinned Repositories
+        <h3 className="font-headline text-3xl font-bold mb-3 flex items-center gap-4">
+          Pull Requests
           <div className="h-[1px] flex-grow bg-outline-variant/30" />
-          <a href="https://github.com/aabhinavvvvvvv?tab=repositories" target="_blank" rel="noreferrer" className="text-primary text-sm font-label flex items-center gap-1 hover:gap-2 transition-all">
-            View all <span className="material-symbols-outlined text-sm">arrow_forward</span>
-          </a>
+          <span className="text-on-surface-variant text-base font-label font-normal">{totalPRs} total</span>
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {PINNED_REPOS.map((repo, i) => (
-            <a
-              key={i}
-              href={repo.url}
-              target="_blank"
-              rel="noreferrer"
-              className="group relative bg-surface-container-low rounded-2xl overflow-hidden p-[1px] transition-all duration-500 hover:scale-[1.02]"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${repo.gradientFrom} ${repo.gradientTo} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-              <div className="relative bg-surface p-6 rounded-[0.95rem] h-full flex flex-col gap-4">
-                <div className="flex justify-between items-start">
-                  <span className={`material-symbols-outlined text-2xl ${repo.iconColor}`}>{repo.icon}</span>
-                  <span className={`font-label text-[10px] py-1 px-3 border border-outline-variant rounded-full text-on-surface-variant uppercase tracking-widest ${repo.badgeColor} transition-colors`}>{repo.badge}</span>
-                </div>
-                <div>
-                  <h4 className={`font-headline text-lg font-bold mb-2 ${repo.hoverColor} transition-colors`}>{repo.name}</h4>
-                  <p className="text-on-surface-variant text-sm leading-relaxed">{repo.desc}</p>
-                </div>
-                <div className="flex items-center gap-2 mt-auto">
-                  <div className={`w-2.5 h-2.5 rounded-full ${repo.langColor}`} />
-                  <span className="text-on-surface-variant text-xs">{repo.lang}</span>
-                  <span className="material-symbols-outlined text-xs text-on-surface-variant/40 ml-auto group-hover:text-primary transition-colors">open_in_new</span>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
+        <p className="text-on-surface-variant text-sm mb-10 font-label">Contributions across {PR_ORGS.length} organizations</p>
 
-      {/* Featured OSS Contributions */}
-      <section className="mb-20">
-        <h3 className="font-headline text-3xl font-bold mb-4 flex items-center gap-4">
-          Open Source Contributions
-          <div className="h-[1px] flex-grow bg-outline-variant/30" />
-        </h3>
-        <p className="text-on-surface-variant text-sm mb-10 font-label">Contributing to CNCF and major open source ecosystems</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {OS_CONTRIBUTIONS.map((contrib, i) => (
-            <a
-              key={i}
-              href={contrib.url}
-              target="_blank"
-              rel="noreferrer"
-              className="group relative bg-surface-container-low rounded-2xl overflow-hidden p-[1px] transition-all duration-500 hover:scale-[1.02]"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${contrib.gradientFrom} ${contrib.gradientTo} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-              <div className="relative bg-surface p-8 rounded-[0.95rem] h-full flex flex-col">
-                <div className="flex justify-between items-start mb-6">
-                  <span className={`material-symbols-outlined text-3xl ${contrib.iconColor}`}>{contrib.icon}</span>
-                  <span className={`font-label text-[10px] py-1 px-3 border border-outline-variant rounded-full text-on-surface-variant uppercase tracking-widest ${contrib.badgeColor} transition-colors`}>{contrib.badge}</span>
-                </div>
-                <h4 className={`font-headline text-2xl font-bold mb-3 ${contrib.hoverColor} transition-colors`}>{contrib.title}</h4>
-                <p className="text-on-surface-variant leading-relaxed mb-8 flex-grow">{contrib.desc}</p>
-                <div className="flex items-center gap-6 mt-auto">
-                  <div className="flex items-center gap-1 text-xs text-primary font-medium">
-                    <span className="material-symbols-outlined text-sm">code</span>
-                    <span>{contrib.meta}</span>
+        <div className="space-y-4">
+          {PR_ORGS.map((org, i) => {
+            const isOpen = expandedOrg === i
+            return (
+              <div key={i} className={`glass-card rounded-2xl overflow-hidden border ${org.borderColor} transition-all duration-300`}>
+                {/* Org Header */}
+                <button
+                  className="w-full flex items-center justify-between p-6 hover:bg-white/[0.02] transition-colors"
+                  onClick={() => setExpandedOrg(isOpen ? null : i)}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`w-10 h-10 rounded-xl ${org.bgColor} flex items-center justify-center`}>
+                      <span className={`material-symbols-outlined text-xl ${org.color}`}>{org.icon}</span>
+                    </div>
+                    <div className="text-left">
+                      <h4 className="font-headline font-bold text-white text-sm">{org.org}</h4>
+                      <p className="text-on-surface-variant text-xs mt-0.5">{org.total} pull request{org.total > 1 ? 's' : ''}</p>
+                    </div>
                   </div>
-                  <span className="material-symbols-outlined text-xs text-on-surface-variant/40 ml-auto group-hover:text-primary transition-colors">open_in_new</span>
-                </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-2">
+                      {org.prs.filter(p => p.state === 'merged').length > 0 && (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-secondary/10 text-secondary border border-secondary/20">
+                          {org.prs.filter(p => p.state === 'merged').length} merged
+                        </span>
+                      )}
+                      {org.prs.filter(p => p.state === 'open').length > 0 && (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                          {org.prs.filter(p => p.state === 'open').length} open
+                        </span>
+                      )}
+                    </div>
+                    <span className={`material-symbols-outlined text-on-surface-variant text-sm transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                      expand_more
+                    </span>
+                  </div>
+                </button>
+
+                {/* PR List */}
+                {isOpen && (
+                  <div className="border-t border-outline-variant/20">
+                    {org.prs.map((pr, j) => (
+                      <a
+                        key={j}
+                        href={pr.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-start gap-4 px-6 py-4 hover:bg-white/[0.03] transition-colors border-b border-outline-variant/10 last:border-0 group"
+                      >
+                        <div className="mt-0.5 shrink-0">
+                          {pr.state === 'merged'
+                            ? <span className="material-symbols-outlined text-secondary text-base">merge</span>
+                            : <span className="material-symbols-outlined text-primary text-base">call_merge</span>
+                          }
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-on-surface text-sm font-medium group-hover:text-primary transition-colors leading-snug truncate">{pr.title}</p>
+                        </div>
+                        <div className="flex items-center gap-3 shrink-0 ml-4">
+                          <StateChip state={pr.state} />
+                          <span className="text-on-surface-variant/40 text-xs font-mono">{pr.num}</span>
+                          <span className="material-symbols-outlined text-xs text-on-surface-variant/30 group-hover:text-primary transition-colors">open_in_new</span>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
-            </a>
-          ))}
+            )
+          })}
         </div>
       </section>
 
