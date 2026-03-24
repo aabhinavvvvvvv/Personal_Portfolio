@@ -48,7 +48,7 @@ export default function Skills() {
       dotColor: 'bg-primary',
       title: 'Languages',
       delay: '0.4s',
-      skills: ['C++ & Python', 'JS & TS'],
+      skills: ['C++ & Python', 'JS & TS', 'Go', 'Solidity'],
     },
   ]
 

@@ -23,13 +23,9 @@ export default function About() {
         {/* Hero */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-48 reveal-on-scroll active">
           <div className="lg:col-span-7">
-            <div className="mb-6 inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-[10px] uppercase tracking-[0.3em] font-black text-primary">Chief Technology Officer</span>
-            </div>
             <h1 className="font-headline text-6xl md:text-8xl font-extrabold tracking-tighter mb-10 text-glow leading-[1.1]">
               Pioneering{' '}
-              <span className="text-transparent bg-clip-text kinetic-gradient">Autonomous</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#9d50bb]">Autonomous</span>
               <br />Architectures.
             </h1>
             <div className="space-y-8 text-xl text-on-surface-variant max-w-2xl leading-relaxed font-light">
