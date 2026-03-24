@@ -1,0 +1,76 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  darkMode: 'class',
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#a5e7ff",
+        "primary-container": "#00d2ff",
+        "on-primary": "#003543",
+        "secondary": "#edb1ff",
+        "secondary-container": "#6e208c",
+        "on-secondary": "#520070",
+        "tertiary": "#ffd79f",
+        "tertiary-container": "#ffb229",
+        "surface": "#131313",
+        "surface-dim": "#131313",
+        "surface-bright": "#3a3939",
+        "surface-container-lowest": "#0e0e0e",
+        "surface-container-low": "#1c1b1b",
+        "surface-container": "#201f1f",
+        "surface-container-high": "#2a2a2a",
+        "surface-container-highest": "#353534",
+        "on-surface": "#e5e2e1",
+        "on-surface-variant": "#bbc9cf",
+        "outline": "#859399",
+        "outline-variant": "#3c494e",
+        "background": "#131313",
+        "on-background": "#e5e2e1",
+        "inverse-surface": "#e5e2e1",
+        "inverse-on-surface": "#313030",
+        "inverse-primary": "#00677f",
+        "error": "#ffb4ab",
+        "error-container": "#93000a",
+        "on-error": "#690005",
+      },
+      fontFamily: {
+        "headline": ["Space Grotesk", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
+        "label": ["Inter", "sans-serif"],
+      },
+      borderRadius: {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "9999px",
+      },
+      animation: {
+        'spin-slow': 'spin 12s linear infinite',
+        'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
+        'float': 'float 6s ease-in-out infinite',
+        'marquee': 'marquee 25s linear infinite',
+        'glow-pulse': 'glowPulse 8s ease-in-out infinite',
+      },
+      keyframes: {
+        pulseGlow: {
+          '0%, 100%': { boxShadow: '0 0 15px rgba(0, 210, 255, 0.4)' },
+          '50%': { boxShadow: '0 0 35px rgba(0, 210, 255, 0.8)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+          '50%': { transform: 'translateY(-20px) rotate(5deg)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        glowPulse: {
+          '0%, 100%': { opacity: '0.3', filter: 'blur(40px)' },
+          '50%': { opacity: '0.6', filter: 'blur(60px)' },
+        },
+      },
+    },
+  },
+  plugins: [],
+}
