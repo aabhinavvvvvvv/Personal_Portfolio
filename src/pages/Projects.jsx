@@ -15,7 +15,7 @@ const PROJECTS = [
     borderColor: 'border-primary/30',
     bgColor: 'bg-primary/5',
     glowColor: 'bg-primary/10',
-    github: 'https://github.com/aabhinavvvvvvv',
+    github: 'https://github.com/aabhinavvvvvvv/finance_building',
   },
   {
     title: 'Blitzschlag\'25',
@@ -34,6 +34,7 @@ const PROJECTS = [
     bgColor: 'bg-secondary/5',
     glowColor: 'bg-secondary/10',
     github: 'https://github.com/aabhinavvvvvvv',
+    live: 'https://blitzschlag.co.in/home',
   },
   {
     title: 'CineBook',
@@ -51,7 +52,7 @@ const PROJECTS = [
     borderColor: 'border-tertiary/30',
     bgColor: 'bg-tertiary/5',
     glowColor: 'bg-tertiary/10',
-    github: 'https://github.com/aabhinavvvvvvv',
+    github: 'https://github.com/aabhinavvvvvvv/Movie_Main',
   },
 ]
 
@@ -130,7 +131,7 @@ export default function Projects() {
                   ))}
                 </ul>
 
-                <div className="flex gap-3 pt-2">
+                <div className="flex gap-3 pt-2 flex-wrap">
                   <a
                     href={project.github}
                     target="_blank"
@@ -140,6 +141,17 @@ export default function Projects() {
                     <span className="material-symbols-outlined text-sm">code</span>
                     Source Code
                   </a>
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-headline font-bold border ${project.borderColor} ${project.bgColor} ${project.color} hover:opacity-80 transition-all`}
+                    >
+                      <span className="material-symbols-outlined text-sm">open_in_new</span>
+                      Live Demo
+                    </a>
+                  )}
                 </div>
               </div>
 
