@@ -28,28 +28,38 @@ async function getContributions(token) {
   return json.data.user.contributionsCollection.contributionCalendar
 }
 
+async function fetchPRPage(token, state, page) {
+  const res = await fetch(
+    `https://api.github.com/search/issues?q=is:pr+is:${state}+author:${USERNAME}&per_page=100&page=${page}&sort=updated`,
+    { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+  )
+  return res.json()
+}
+
 async function getPRs(token) {
+  const seen = new Set()
   const allPRs = []
-  let page = 1
-  while (true) {
-    const res = await fetch(
-      `https://api.github.com/search/issues?q=is:pr+author:${USERNAME}&per_page=100&page=${page}&sort=updated`,
-      { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
-    )
-    const data = await res.json()
-    if (!data.items?.length) break
-    for (const pr of data.items) {
-      allPRs.push({
-        title: pr.title,
-        number: pr.number,
-        state: pr.pull_request?.merged_at ? 'merged' : pr.state,
-        url: pr.html_url,
-        repo: pr.repository_url.replace('https://api.github.com/repos/', ''),
-        updatedAt: pr.updated_at,
-      })
+
+  for (const state of ['open', 'closed']) {
+    let page = 1
+    while (true) {
+      const data = await fetchPRPage(token, state, page)
+      if (!data.items?.length) break
+      for (const pr of data.items) {
+        if (seen.has(pr.id)) continue
+        seen.add(pr.id)
+        allPRs.push({
+          title: pr.title,
+          number: pr.number,
+          state: pr.pull_request?.merged_at ? 'merged' : pr.state,
+          url: pr.html_url,
+          repo: pr.repository_url.replace('https://api.github.com/repos/', ''),
+          updatedAt: pr.updated_at,
+        })
+      }
+      if (data.items.length < 100) break
+      page++
     }
-    if (data.items.length < 100) break
-    page++
   }
   return allPRs
 }
