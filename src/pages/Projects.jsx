@@ -34,7 +34,7 @@ const PROJECTS = [
     bgColor: 'bg-secondary/5',
     glowColor: 'bg-secondary/10',
     github: 'https://github.com/aabhinavvvvvvv',
-    live: 'https://blitzschlag.co.in/home',
+    live: 'https://blitzschlag.co.in/',
   },
   {
     title: 'CineBook',
