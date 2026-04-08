@@ -33,7 +33,7 @@ export default function About() {
                 I am <span className="text-white font-semibold">Abhinav Gupta</span>, engineering the next generation of scalable intelligence. Based at <span className="text-primary italic">MNIT Jaipur</span>, my focus lies at the core of high-frequency backend systems and neural orchestration.
               </p>
               <p>
-                Currently leading technical strategy as <span className="text-secondary font-medium">CTO at Qlikwise</span>, crafting resilient infrastructures that empower data-driven decisions at scale.
+                Currently leading technical strategy as <a href="https://qlikwise.com/" target="_blank" rel="noreferrer" className="text-secondary font-medium hover:underline">CTO at Qlikwise</a>, crafting resilient infrastructures that empower data-driven decisions at scale.
               </p>
             </div>
             <div className="mt-14 flex flex-wrap gap-6">
@@ -84,6 +84,7 @@ export default function About() {
                 hoverColor: 'group-hover:text-primary',
                 lineColor: 'bg-primary',
                 title: 'CTO at Qlikwise',
+                link: 'https://qlikwise.com/',
                 desc: 'Spearheading technical innovation and engineering vision. Overseeing the architectural design of high-performance analytics platforms and cloud-native solutions.',
                 tags: ['Executive', 'Strategy'],
               },
@@ -114,7 +115,9 @@ export default function About() {
                   <p className="text-white/40 text-sm mt-1 uppercase tracking-widest">{item.category}</p>
                 </div>
                 <div className="md:col-span-6">
-                  <h4 className={`text-3xl font-bold font-headline text-white ${item.hoverColor} transition-colors`}>{item.title}</h4>
+                  <h4 className={`text-3xl font-bold font-headline text-white ${item.hoverColor} transition-colors`}>
+                    {item.link ? <a href={item.link} target="_blank" rel="noreferrer" className="hover:underline">{item.title}</a> : item.title}
+                  </h4>
                   <p className="text-on-surface-variant mt-4 text-lg leading-relaxed">{item.desc}</p>
                 </div>
                 <div className="md:col-span-3 flex flex-wrap gap-2 justify-start md:justify-end">
