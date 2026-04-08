@@ -53,7 +53,7 @@ export default function About() {
               <img
                 alt="Abhinav Gupta Portrait"
                 className="w-full h-full object-cover rounded-[1.8rem] grayscale hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGQM5XMA2ProV4w2HFMHe3mTewPJCfNSBOydfERBgJt-s4NR6eh68rM2lYAvG6IgB5gYngyEPI4d_kPHoGqolRxP9A1-o42mfzUhq9bGCzWbIz7QiNy-NsxSJKQRDHr3VJno5L7M3nKN5YNuKqn-f3-u5jEsfGnLnU3w_m-vc1GeIEns8G6KTMaCbVaqznEvRK93Joa1PO30QWFEFJTPdrtiY9Fae0dZbY_i4poYpMVh5f6wcxEQylIXlGfCXVfXhVJYxlnnYjuqQM"
+                src="https://avatars.githubusercontent.com/aabhinavvvvvvv"
               />
             </div>
             <div className="absolute -top-10 -right-10 w-24 h-24 glass-card rounded-3xl flex items-center justify-center text-primary animate-float">
