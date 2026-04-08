@@ -8,6 +8,7 @@ const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
 const OpenSource = lazy(() => import('./pages/OpenSource'))
 const Skills = lazy(() => import('./pages/Skills'))
+const Projects = lazy(() => import('./pages/Projects'))
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
@@ -24,6 +25,7 @@ export default function App() {
       case '/about': return 'about'
       case '/open-source': return 'open-source'
       case '/skills': return 'skills'
+      case '/projects': return 'projects'
       default: return 'home'
     }
   }
@@ -38,6 +40,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/open-source" element={<OpenSource />} />
           <Route path="/skills" element={<Skills />} />
+          <Route path="/projects" element={<Projects />} />
         </Routes>
       </Suspense>
       <BottomNav activePage={getActivePage()} />

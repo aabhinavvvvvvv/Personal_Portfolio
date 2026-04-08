@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 export default function BottomNav({ activePage }) {
   const links = [
     { to: '/', icon: 'home', label: 'Home', key: 'home' },
+    { to: '/projects', icon: 'folder_open', label: 'Projects', key: 'projects' },
     { to: '/skills', icon: 'rocket_launch', label: 'Skills', key: 'skills' },
     { to: '/open-source', icon: 'hub', label: 'Open Source', key: 'open-source' },
     { to: '/about', icon: 'person', label: 'About', key: 'about' },

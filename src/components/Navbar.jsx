@@ -6,6 +6,7 @@ export default function Navbar({ activePage }) {
 
   const links = [
     { to: '/', label: 'Home', key: 'home' },
+    { to: '/projects', label: 'Projects', key: 'projects' },
     { to: '/skills', label: 'Skills', key: 'skills' },
     { to: '/open-source', label: 'Open Source', key: 'open-source' },
     { to: '/about', label: 'About', key: 'about' },

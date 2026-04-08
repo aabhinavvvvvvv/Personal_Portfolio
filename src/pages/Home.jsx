@@ -87,10 +87,14 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
-            <button className="kinetic-gradient text-white font-headline px-12 py-5 rounded-full font-bold shadow-[0_0_25px_rgba(0,210,255,0.4)] hover:scale-105 transition-all duration-300 flex items-center gap-3 group animate-pulse-glow">
+            <a href="mailto:abhinavguptaxia9213@gmail.com" className="kinetic-gradient text-white font-headline px-12 py-5 rounded-full font-bold shadow-[0_0_25px_rgba(0,210,255,0.4)] hover:scale-105 transition-all duration-300 flex items-center gap-3 group animate-pulse-glow">
               Get in Touch
               <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">rocket_launch</span>
-            </button>
+            </a>
+            <a href="/resume.pdf" download className="px-8 py-4 rounded-full border border-white/10 text-white font-headline font-bold hover:bg-white/5 hover:border-white/20 transition-all duration-300 flex items-center gap-2 text-sm">
+              <span className="material-symbols-outlined text-sm text-primary">download</span>
+              Resume
+            </a>
           </div>
         </div>
 

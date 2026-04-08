@@ -37,13 +37,13 @@ export default function About() {
               </p>
             </div>
             <div className="mt-14 flex flex-wrap gap-6">
-              <button className="group px-10 py-4 rounded-full kinetic-gradient text-on-primary font-bold shadow-[0_0_30px_rgba(0,210,255,0.3)] hover:shadow-[0_0_50px_rgba(0,210,255,0.5)] transition-all duration-500 flex items-center gap-3">
-                Acquire Portfolio
-                <span className="material-symbols-outlined text-lg group-hover:translate-y-1 transition-transform">arrow_downward</span>
-              </button>
-              <button className="px-10 py-4 rounded-full border border-white/10 text-white font-bold hover:bg-white/5 hover:border-white/20 transition-all duration-300">
-                Read Whitepapers
-              </button>
+              <a href="/resume.pdf" download className="group px-10 py-4 rounded-full kinetic-gradient text-on-primary font-bold shadow-[0_0_30px_rgba(0,210,255,0.3)] hover:shadow-[0_0_50px_rgba(0,210,255,0.5)] transition-all duration-500 flex items-center gap-3">
+                Download Resume
+                <span className="material-symbols-outlined text-lg group-hover:translate-y-1 transition-transform">download</span>
+              </a>
+              <a href="/projects" className="px-10 py-4 rounded-full border border-white/10 text-white font-bold hover:bg-white/5 hover:border-white/20 transition-all duration-300">
+                View Projects
+              </a>
             </div>
           </div>
 
@@ -154,12 +154,12 @@ export default function About() {
             <p className="text-on-surface-variant text-xl max-w-md font-light">Open for strategic partnerships, high-stakes engineering roles, and innovative ventures.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <a className="group p-8 glass-card rounded-3xl hover:bg-primary/5 transition-colors" href="mailto:abhinav@example.com">
+            <a className="group p-8 glass-card rounded-3xl hover:bg-primary/5 transition-colors" href="mailto:abhinavguptaxia9213@gmail.com">
               <span className="material-symbols-outlined text-primary text-3xl mb-4 block">alternate_email</span>
               <h5 className="font-headline font-bold text-lg text-white mb-1">Direct Channel</h5>
-              <p className="text-white/40 text-xs uppercase tracking-widest">abhinav@example.com</p>
+              <p className="text-white/40 text-xs uppercase tracking-widest">abhinavguptaxia9213@gmail.com</p>
             </a>
-            <a className="group p-8 glass-card rounded-3xl hover:bg-secondary/5 transition-colors" href="#">
+            <a className="group p-8 glass-card rounded-3xl hover:bg-secondary/5 transition-colors" href="https://www.linkedin.com/in/abhinav-gupta-a08b13304/" target="_blank" rel="noreferrer">
               <span className="material-symbols-outlined text-secondary text-3xl mb-4 block">share</span>
               <h5 className="font-headline font-bold text-lg text-white mb-1">Digital Footprint</h5>
               <p className="text-white/40 text-xs uppercase tracking-widest">Connect on LinkedIn</p>
@@ -172,9 +172,9 @@ export default function About() {
             <p className="text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">© 2025 ABHINAV GUPTA. ALL RIGHTS RESERVED.</p>
           </div>
           <div className="flex gap-10 text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">
-            <a className="hover:text-primary transition-colors" href="#">MNIT JAIPUR</a>
-            <a className="hover:text-primary transition-colors" href="#">GITHUB</a>
-            <a className="hover:text-primary transition-colors" href="#">SYSTEM STATUS</a>
+            <a className="hover:text-primary transition-colors" href="https://mnit.ac.in" target="_blank" rel="noreferrer">MNIT JAIPUR</a>
+            <a className="hover:text-primary transition-colors" href="https://github.com/aabhinavvvvvvv" target="_blank" rel="noreferrer">GITHUB</a>
+            <a className="hover:text-primary transition-colors" href="https://x.com/aabhinavvvvvv" target="_blank" rel="noreferrer">TWITTER / X</a>
           </div>
         </div>
         <div className="absolute inset-0 -z-10 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
